@@ -6,10 +6,10 @@ namespace TicTacToe
     public partial class Form1 : Form
     {
         private int _player = 2; // even = X turn, odd = O turn; 
-        private int _clickNumber; //to numer gry byl, prawda?
-        private int s1; //co to za zmienne? sprobuj je nazwac tak, zeby mi bylo latwo zrozumiec za co odpowiadaja
-        private int s2;
-        private int sd;  // count _clickNumber;
+        private int _clickNumber; //to numer gry byl, prawda? /- Ile "kolejek" przeszło/how many turns passed/stąd nazwa turns;
+        private int _firstPlayerWins; // wins of player no. 1
+        private int _secondPlayerWins; // wins of player no. 2
+        private int _numberOfDraws;  // count _clickNumber; count the number of draws
         private const string _x = "X";
         private const string _o = "O";
 
@@ -33,7 +33,7 @@ namespace TicTacToe
             if (CheckDraws())
             {
                 MessageBox.Show("Tie Game!!");
-                sd++;
+                _numberOfDraws++;
                 NewGame();
             }
 
@@ -43,13 +43,13 @@ namespace TicTacToe
             if(button.Text == _x)
             {
                 MessageBox.Show(_x + " Won!!");
-                s1++;
+                _firstPlayerWins++;
                 NewGame();
             }
             else
             {
                 MessageBox.Show(_o + " Won!!");
-                s2++;
+                _secondPlayerWins++;
                 NewGame();
             }
         }
@@ -65,9 +65,9 @@ namespace TicTacToe
 
         private void Results()
         {
-            XWin.Text = _x + ": " + s1;
-            OWin.Text = _o + ": " + s2;
-            Draws.Text = "Draws: " + sd;
+            XWin.Text = _x + ": " + _firstPlayerWins;
+            OWin.Text = _o + ": " + _secondPlayerWins;
+            Draws.Text = "Draws: " + _numberOfDraws;
         }
 
         private void NewGame()
@@ -116,7 +116,7 @@ namespace TicTacToe
 
         private void RButton_Click(object sender, EventArgs e)
         {
-            s1 = s2 = sd = 0;
+            _firstPlayerWins = _secondPlayerWins = _numberOfDraws = 0;
             NewGame();
         }
     }
